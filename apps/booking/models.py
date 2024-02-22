@@ -8,7 +8,7 @@ User = get_user_model()
 
 class Booking(BaseModel):
     resident = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="bookings")
-    room = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, related_name='room_times')
+    room = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='room_times')
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=True)

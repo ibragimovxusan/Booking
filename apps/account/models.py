@@ -18,6 +18,16 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class Company(BaseModel):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+
 class User(AbstractUser, BaseModel):
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
     phone_number = models.CharField(max_length=15, null=True, blank=True)
@@ -26,6 +36,7 @@ class User(AbstractUser, BaseModel):
     end = models.TimeField(null=True, blank=True)
     break_start = models.TimeField(null=True, blank=True)
     break_end = models.TimeField(null=True, blank=True)
+    company = models.ForeignKey('Company', on_delete=models.SET_NULL, null=True, related_name='employees')
 
     @property
     def tokens(self):
@@ -38,13 +49,3 @@ class User(AbstractUser, BaseModel):
 
     def __str__(self):
         return self.username
-
-
-class Company(BaseModel):
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    barber = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='barbers')
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.name

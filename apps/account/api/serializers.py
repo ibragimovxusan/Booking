@@ -65,6 +65,8 @@ class UserCreateUpdateSerializer(serializers.ModelSerializer):
 
 
 class BarberUserSerializer(serializers.ModelSerializer):
+    company = serializers.CharField(source='company.name', read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -79,6 +81,7 @@ class BarberUserSerializer(serializers.ModelSerializer):
             'end',
             'break_start',
             'break_end',
+            'company'
         ]
 
 
@@ -97,6 +100,7 @@ class BarberUserCreateUpdateSerializer(serializers.ModelSerializer):
             'end',
             'break_start',
             'break_end',
+            'company',
             'password',
         ]
         extra_kwargs = {
@@ -116,6 +120,7 @@ class BarberUserCreateUpdateSerializer(serializers.ModelSerializer):
             end=validated_data['end'],
             break_start=validated_data['break_start'],
             break_end=validated_data['break_end'],
+            company=validated_data['company'],
             password=validated_data['password']
         )
         return user
@@ -130,32 +135,36 @@ class BarberUserCreateUpdateSerializer(serializers.ModelSerializer):
         instance.end = validated_data.get('end', instance.end)
         instance.break_start = validated_data.get('break_start', instance.break_start)
         instance.break_end = validated_data.get('break_end', instance.break_end)
+        instance.company = validated_data.get('company', instance.company)
         instance.set_password(validated_data.get('password', instance.password))
         instance.save()
         return instance
 
 
 class CompanySerializer(serializers.ModelSerializer):
-    barber = BarberUserSerializer(read_only=True, many=True)
-
     class Meta:
         model = Company
         fields = [
             'id',
             'name',
             'address',
-            'barber',
             'is_active',
+            'employees',
         ]
 
 
 class CompanyCreateSerializer(serializers.ModelSerializer):
+    employees = BarberUserSerializer(many=True, read_only=True)
+
     class Meta:
         model = Company
         fields = [
             'id',
             'name',
             'address',
-            'barber',
-            'is_active'
+            'is_active',
+            'employees',
         ]
+        extra_kwargs = {
+            'employees': {'read_only': True}
+        }

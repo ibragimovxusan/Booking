@@ -15,6 +15,23 @@ class BookingCreatedSerializer(serializers.ModelSerializer):
             'created_at': {'read_only': True},
         }
 
+    def create(self, validated_data):
+        resident = self.context['request'].user
+        start = validated_data.get('start')
+        end = validated_data.get('end')
+        room = validated_data.get('room')
+
+        if Booking.objects.filter(room=room, start__lte=start, end__gte=start).exists() or \
+                Booking.objects.filter(room=room, start__lte=end, end__gte=end).exists() or \
+                Booking.objects.filter(room=room, start__gte=start, end__lte=end).exists():
+            raise serializers.ValidationError("The room is already booked for that time")
+
+        if start > end:
+            raise serializers.ValidationError("Start time cannot be greater than end time")
+
+        booking = Booking.objects.create(**validated_data)
+        return booking
+
 
 class BookingListSerializer(serializers.ModelSerializer):
     class Meta:

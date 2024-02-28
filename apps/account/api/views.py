@@ -1,4 +1,5 @@
 from rest_framework import generics, status, permissions
+from rest_framework.parsers import MultiPartParser, FileUploadParser
 from rest_framework.response import Response
 
 from apps.account.models import User, Company
@@ -12,6 +13,7 @@ from .serializers import (
 class RegisterUserAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateUpdateSerializer
+    parser_classes = (MultiPartParser, FileUploadParser)
     permission_classes = (permissions.AllowAny,)
 
     def create(self, request, *args, **kwargs):

@@ -1,10 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="icon" href="{% static '' %}images/icon.png" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Blaxcut - Barbershop Website Template" name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="author">
+    <title>Barbershop</title>
+
+    <link href="{% static '' %}css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="{% static '' %}css/mdb.min.css" rel="stylesheet" type="text/css" id="mdb">
+    <link href="{% static '' %}css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="{% static '' %}css/style.css" rel="stylesheet" type="text/css">
+    <link href="{% static '' %}css/coloring.css" rel="stylesheet" type="text/css">
+    <!-- color scheme -->
+    <link id="colors" href="{% static '' %}css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo">
+                    <a href="/">
+                        <img src="{% static '' %}images/logo.png" alt="Barbershop">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer">
+                    <p>&copy; 2021 Barbershop</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>

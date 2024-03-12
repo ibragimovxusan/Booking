@@ -98,7 +98,7 @@ body {
     text-align: center;
 }
 
-.barber_cart {
+.barber__item {
     display: grid;
     height: 300px;
     width: 90%;
@@ -106,7 +106,7 @@ body {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 10px 25px;
 
 }
 .cart__header {
@@ -131,19 +131,39 @@ body {
 .booking {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    margin: 20px 0;
     border-radius: 10px;
     width: 100%;
+    height: auto;
+    row-gap: 30px;
 }
 
 .booking__time {
     width: 27%;
-    border: 1px solid #000;
-    border-radius: 30px;
-    padding-top: 10px;
+    /* height: 60px; */
     text-align: center;
-    height: 40px;
     list-style: none;
 }
+
+.booking .booking__time a {
+    font-size: 22px;
+    font-weight: 500;
+    color: #000;
+    text-decoration: none;
+    padding: 12px 70px;
+    border-radius: 30px;
+    border: 1px solid #b6b6b6;
+}
+
+.booking .booking__time a:hover {
+    color: #fff;
+    background-color: #000;
+    padding: 12px 70px;
+    border-radius: 30px;
+    border: 1px solid #b6b6b6;
+    transition: 1s;
+}
+
 

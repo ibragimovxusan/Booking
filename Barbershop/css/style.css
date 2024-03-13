@@ -167,12 +167,25 @@ body {
 }
 
 
-.info    {
-    border: 1px solid #000;
+.info {
+    border-radius: 10px;
     margin: 100px auto;
     height: 400px;
     width: 500px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.info p {
+    text-align: center;
+}
 
+.info_head {
+    display: flex;
+    justify-content: space-around;
+    height: 120px;
+    align-items: center;
+}
 
+.info_head img {
+    border-radius: 50%;
+}
